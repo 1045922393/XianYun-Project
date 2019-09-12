@@ -1,6 +1,5 @@
 <template>
   <div class="hotel">
-    <h1>hotel</h1>
     <!-- 酒店详情 -->
     <HotelDetails/>
   </div>
