@@ -8,7 +8,7 @@
 
       <el-col class="post-wrapper" :span="17">
         <!-- 文章展示区域 -->
-        <!-- <Main /> -->
+        <Main/>
       </el-col>
     </el-row>
   </div>
@@ -16,6 +16,7 @@
 
 <script>
 import Aside from "@/components/post/aside";
+import Main from "@/components/post/main";
 export default {
   data() {
     return {
@@ -24,7 +25,7 @@ export default {
   },
   components: {
     Aside,
-    // Main
+    Main
   }
 };
 </script>
