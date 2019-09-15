@@ -5,7 +5,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: '世界上最大的旅游网站',
+    title: '第九组是最牛逼的！！！',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -14,7 +14,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', type: 'text/css', href: '//at.alicdn.com/t/font_1168872_ehvuah8v57g.css'}
-    ]
+    ]                                                 
   },
   /*
   ** Customize the progress-bar color
