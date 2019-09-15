@@ -25,20 +25,6 @@
           </el-button>
         </el-col>
       </el-row>
-
-      <!-- 轮播图 -->
-      <!-- <div class="container">
-        <el-carousel  arrow="always">
-          <el-carousel-item v-for="(item,index) in banners" :key="index">
-            <div 
-            class="banner-image" 
-            :style="`background:url(${$axios.defaults.baseURL + item.url}) center center no-repeat;
-            background-size:contain contain`">
-            </div>
-          </el-carousel-item>
-        </el-carousel>
-      </div> -->
-
     </header>
   </div>
 </template>
@@ -49,9 +35,6 @@ export default {
       searchText: "",
       // 推荐文字数组
       recommendList: ["广州", "上海", "北京"],
-
-      // // 轮播图
-      // banners: []
     };
   },
   methods: {
@@ -64,15 +47,6 @@ export default {
       this.$emit("getDataByCity", item);
     }
   },
-  // mounted() {
-  //   // 请求轮播图的数据
-  //   this.$axios({
-  //     url: "/scenics/banners"
-  //   }).then(res => {
-  //     // 赋值给banners
-  //     this.banners = res.data.data;
-  //   });
-  // }
 };
 </script>
 <style lang='less' scoped>
@@ -136,34 +110,5 @@ header {
       border-bottom: 2px solid @color;
     }
   }
-//   .el-carousel__item h3 {
-//     color: #475669;
-//     font-size: 18px;
-//     opacity: 0.75;
-//     height: 200px;
-//     line-height: 300px;
-//     margin: 0;
-//   }
-
-//   .el-carousel__item:nth-child(2n) {
-//     background-color: #99a9bf;
-//   }
-
-//   .el-carousel__item:nth-child(2n+1) {
-//     background-color: #d3dce6;
-//   }
-//   .container{
-//     width:100%;
-//     margin:0 auto;
-//     position:relative;
-//  /deep/ .el-carousel__container {
-//     height: 300px;
-//   }
-//    .banner-image{
-//         width:100%;
-//         height:100%;
-//     }
-//   }
- 
 }
 </style>

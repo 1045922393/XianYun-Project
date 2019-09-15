@@ -79,10 +79,16 @@
     </main>
     <!-- 分页 -->
     <el-pagination class="pagination" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[3, 5, 10, 15]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
+    <!-- 返回顶部 -->
+    <el-tooltip placement="top" content="返回顶部">
+      <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50">
+      </back-to-top>
+    </el-tooltip>
   </div>
 </template>
 <script>
 import Head from "./head";
+import BackToTop from "./scrolltop";
 export default {
   data() {
     return {
@@ -116,11 +122,24 @@ export default {
           url:
             "https://n2-q.mafengwo.net/s11/M00/3D/3F/wKgBEFtrlBWAUHczAAR1Jh3BMT410.jpeg"
         }
-      ]
+      ],
+      // 返回顶部
+      myBackToTopStyle: {
+        "left": "730px",
+        "bottom": "30px",
+        "width": "40px",
+        "height": "40px",
+        "border":"1px solid #e5e5e5",
+        "border-radius": "20px",
+        "line-height": "40px",
+        "background": "#fff"
+      }
     };
   },
   components: {
-    Head
+    Head,
+    // 回到顶部组件
+    BackToTop
   },
   mounted() {
     // 默认从第0条数据开始拿，拿3条数据
@@ -274,14 +293,14 @@ main {
   /deep/ .el-carousel__container {
     height: 350px;
   }
-//   .el-carousel__indicators{
-// float: right;
-//   }
+  //   .el-carousel__indicators{
+  // float: right;
+  //   }
   /deep/ .el-carousel__button {
     width: 12px;
     height: 12px;
     border: 1px solid #088;
-    border-radius:50%;
+    border-radius: 50%;
   }
   .banner-image {
     width: 100%;
