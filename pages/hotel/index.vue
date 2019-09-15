@@ -236,7 +236,6 @@ export default {
     // 封装筛选
     filterHotel() {
       let defObj = this.$route.query;
-      console.log(defObj)
       this.$axios({
         url: "/hotels",
         method: "get",
