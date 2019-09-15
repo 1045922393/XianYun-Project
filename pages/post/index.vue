@@ -25,7 +25,7 @@ export default {
   },
   components: {
     Aside,
-    Main
+    Main,
   }
 };
 </script>
