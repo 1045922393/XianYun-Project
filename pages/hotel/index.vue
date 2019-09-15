@@ -4,7 +4,7 @@
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>酒店</el-breadcrumb-item>
-          <el-breadcrumb-item>南京市酒店预订</el-breadcrumb-item>
+          <el-breadcrumb-item>{{cityName}}酒店预订</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="search">
@@ -71,7 +71,7 @@
             </el-card>
           </el-col>
           <el-col :span="5">
-            <el-button type="primary">查看价格</el-button>
+            <el-button type="primary" @click="checkPrice">清空筛选</el-button>
           </el-col>
         </el-row>
       </div>
@@ -93,7 +93,15 @@
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
       <div class="page">
-          <el-pagination class="pagination" prev-text="<上一页" next-text="下一页>" layout="prev, pager, next" :total="50"></el-pagination>
+        <el-pagination
+          class="pagination"
+          prev-text="<上一页"
+          next-text="下一页>"
+          layout="prev, pager, next"
+          :total="hotelsTotal"
+          :current-page="$route.query.page?$route.query.page-0:1"
+          @current-change="pageChange"
+        ></el-pagination>
       </div>
     </div>
   </div>
@@ -176,6 +184,7 @@ export default {
       hotelsTotal: 0,
       // 绑定搜索城市数据
       citystate: "南京市",
+      cityName: "",
       cityData: {},
       daterange: []
     };
@@ -192,6 +201,23 @@ export default {
     }
   },
   methods: {
+    // 页码
+    pageChange(val){
+      let url = this.$route.fullPath
+      if(url.indexOf('page')===-1){
+        url+="&page="+val
+      }else{
+        if(val===1){
+          url=url.replace(`&page=${this.$route.query.page}`,"")
+        }
+        url=url.replace(`page=${this.$route.query.page}`,`page=${val}`)
+      }
+      this.$router.push(url)
+    },
+    // 查看价格
+    checkPrice() {
+      this.$router.push("/hotel?city=74")
+    },
     // 确认人数
     comfirmCounts() {
       this.counts = `${this.adultValue}成人`;
@@ -204,7 +230,24 @@ export default {
     },
     // 选择时间触发事件
     chooseDateRange(value) {
-      // console.log(value)
+      let url = this.$route.fullPath;
+      if (!value) {
+        url = url.replace(
+          `&enterTime=${this.$route.query.enterTime}&leftTime=${this.$route.query.leftTime}`,
+          ""
+        );
+        this.$router.push(url);
+        return false;
+      }
+      if (!this.$route.query.enterTime) {
+        url += `&enterTime=${value[0]}&leftTime=${value[1]}`;
+      } else {
+        url = url.replace(
+          `enterTime=${this.$route.query.enterTime}&leftTime=${this.$route.query.leftTime}`,
+          `enterTime=${value[0]}&leftTime=${value[1]}`
+        );
+      }
+      this.$router.push(url);
       // console.log(this.daterange)
     },
     async querySearchAsync(queryString, cb) {
@@ -225,6 +268,7 @@ export default {
       });
       // 默认是第一个
       this.citystate = res.data.data[0].name;
+      this.cityName = res.data.data[0].name;
       // 回调需要的是数组,而且数组的元素是一个个带value的对象
       cb(arr);
     },
@@ -235,11 +279,16 @@ export default {
     },
     // 封装筛选
     filterHotel() {
-      let defObj = this.$route.query;
+      let url = this.$route.fullPath
+      if(url.indexOf("page")!==-1){
+        url = url.replace(`page=${this.$route.query.page}`,`_start=${(this.$route.query.page-1)*5}`)
+      }
+      // let defObj = this.$route.query;
+      let queryStr = url.slice(6)
       this.$axios({
-        url: "/hotels",
-        method: "get",
-        params: defObj
+        url: `/hotels${queryStr}`,
+        method: "get"
+        // params: defObj
       }).then(res => {
         this.hotels = res.data.data;
         this.hotelsTotal = res.data.total;
@@ -303,13 +352,13 @@ export default {
     .filter {
       margin-top: 20px;
     }
-    .page{
-      padding:10px 0;
-      box-sizing:border-box;
+    .page {
+      padding: 10px 0;
+      box-sizing: border-box;
       height: 50px;
-      .pagination{
-        float:right;
-        color:blueviolet;
+      .pagination {
+        float: right;
+        color: blueviolet;
       }
     }
   }
