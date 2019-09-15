@@ -47,8 +47,8 @@ export default {
         return {
             // 表单数据
             form: {
-                username: "", // 用户名
-                password: "", // 密码
+                username: "13800138000", // 用户名
+                password: "123456", // 密码
             },
             // 表单规则,只负责提示，但是表单还是可以提交
             rules: {
