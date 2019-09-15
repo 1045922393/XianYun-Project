@@ -12,7 +12,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: 'https://github.githubassets.com/favicon.ico' },
       { rel: 'stylesheet', type: 'text/css', href: '//at.alicdn.com/t/font_1168872_ehvuah8v57g.css'}
     ]                                                 
   },
@@ -54,7 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: "http://127.0.0.1:1337" // 新增axios默认请求路径http://127.0.0.1:1337
+    baseURL: "http://157.122.54.189:9095" // 新增axios默认请求路径http://127.0.0.1:1337
     // http://157.122.54.189:9095
   },
   /*
