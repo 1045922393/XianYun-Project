@@ -92,6 +92,7 @@
         <!-- 循环遍历酒店列表 -->
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
+      <div v-show="hotels.length===0"><h2>没有适合条件的酒店信息</h2></div>
       <div class="page">
         <el-pagination
           class="pagination"

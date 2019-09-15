@@ -77,15 +77,24 @@ export default {
         levels: [],
         types: []
       },
-      levelValue: [],
-      typesValue: [],
-      assetsValue: [],
-      brandsValue: []
+      levelValue:'',
+      typesValue:'',
+      assetsValue:'',
+      brandsValue:''
     };
   },
   methods: {
+    // 去page
+    delPage(url){
+      if(this.$route.query.page){
+         return url.replace(`&page=${this.$route.query.page}`,"")
+      }else{
+        return url
+      }
+    },
     changeBrands(command){
        let url = this.$route.fullPath;
+      url= this.delPage(url)
       if (!this.$route.query.hotelbrand) {
         url += "&hotelbrand=" + command;
       } else {
@@ -98,6 +107,7 @@ export default {
     },
     changeAsset(command) {
       let url = this.$route.fullPath;
+          url= this.delPage(url)
       if (!this.$route.query.hotelasset) {
         url += "&hotelasset=" + command;
       } else {
@@ -110,6 +120,7 @@ export default {
     },
     changeType(command) {
       let url = this.$route.fullPath;
+   url= this.delPage(url)
       if (!this.$route.query.hoteltype) {
         url += "&hoteltype=" + command;
       } else {
@@ -122,6 +133,7 @@ export default {
     },
     changeLevel(command) {
       let url = this.$route.fullPath;
+       url= this.delPage(url)
       if (!this.$route.query.hotellevel) {
         url += "&hotellevel=" + command;
       } else {
@@ -135,6 +147,7 @@ export default {
     priceChange(val) {
       // 判断路由是否有price_lt
       let url = this.$route.fullPath;
+   url= this.delPage(url)
       let index = url.indexOf("price_lt");
       if (index === -1) {
         url += `&price_lt=${val}`;
@@ -142,9 +155,28 @@ export default {
         url = url.replace(this.$route.query.price_lt - 0, val);
       }
       this.$router.push(url);
+    },
+    // 封装筛选框的获取数据
+    filterInit(){
+      let route = this.$route.query;
+      this.levelValue=route.hotellevel?route.hotellevel-0:'';
+      this.typesValue=route.hoteltype?route.hoteltype-0:'';
+      this.assetsValue=route.hotelasset?route.hotelasset-0:'';
+      this.brandsValue=route.hotelbrand?route.hotelbrand-0:'';
+    }
+  },
+  /**
+   *  levelValue:1,
+      typesValue: this.$route.query.hotellevel?this.$route.query.hotellevel:'',
+      assetsValue: [],
+      brandsValue: [] */ 
+  watch:{
+    $route(){
+      this.filterInit()
     }
   },
   mounted() {
+    this.filterInit()
     this.$axios({
       url: "/hotels/options"
     }).then(res => {

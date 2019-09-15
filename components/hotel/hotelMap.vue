@@ -18,50 +18,51 @@ export default {
       default: []
     }
   },
-  methods: {
-  },
+  methods: {},
   watch: {
-    markHotels() {
+    $route() {
       let _this = this;
-      window.onload()
+      window.onload();
     }
+  },
+  updated() {
+    let _this = this;
+    window.onload();
   },
   mounted() {
     var url =
-      "https://webapi.amap.com/maps?v=1.4.15&key=4b518a6fcd95aefe165e7e3469e6ab39&callback=onload";
+      "https://webapi.amap.com/maps?v=1.4.15&key=12fab664351852559150c296a870b368&callback=onload";
     let _this = this;
     window.onload = function() {
-      var map = new AMap.Map("container", {
-        center: [
-          _this.markHotels[0]
-            ? _this.markHotels[0].location.longitude
-            : 118,
-          _this.markHotels[0]
-            ? _this.markHotels[0].location.latitude
-            : 31
-        ],
-        // zoom放大等级
-        zoom: 7
-      });
-      // console.log(_this.markHotels);
-      let markList = [];
-      _this.markHotels.forEach((item, index) => {
-        let marker = new AMap.Marker({
-          position: new AMap.LngLat(
-            item.location.longitude,
-            item.location.latitude
-          ), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-          title: item.name,
-          content: `<div style="width:22px;
+      setTimeout(() => {
+        var map = new AMap.Map("container", {
+          center: [
+            _this.markHotels[0] ? _this.markHotels[0].location.longitude : 118,
+            _this.markHotels[0] ? _this.markHotels[0].location.latitude : 31
+          ],
+          // zoom放大等级
+          zoom: 7
+        });
+        // console.log(_this.markHotels);
+        let markList = [];
+        _this.markHotels.forEach((item, index) => {
+          let marker = new AMap.Marker({
+            position: new AMap.LngLat(
+              item.location.longitude,
+              item.location.latitude
+            ), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+            title: item.name,
+            content: `<div style="width:22px;
                   height:36px;
                   background:url('https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png') center no-repeat;
                   background-size:contain;
                   text-align:center;
                   color:#fff;">${index + 1}</div>`
+          });
+          markList.push(marker);
         });
-        markList.push(marker);
-      });
-      map.add(markList);
+        map.add(markList);
+      }, 1000);
     };
     var jsapi = document.createElement("script");
     jsapi.charset = "utf-8";
