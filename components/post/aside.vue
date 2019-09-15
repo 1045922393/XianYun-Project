@@ -105,6 +105,8 @@ export default {
     span {
       margin-left: 15px;
       font-size: 14px;
+      cursor:default;
+
     }
     &:last-child {
       border-bottom: 1px solid #ccc;
@@ -127,7 +129,7 @@ export default {
     width: 350px;
     height: 36px;
     line-height: 36px;
-    z-index: 9;
+    z-index: 11;
     .back {
       background-color: #fff;
     }
@@ -146,6 +148,7 @@ export default {
       font-size: 25px;
       margin-left: 15px;
       font-style: italic;
+      
     }
 
     .oneCity {
@@ -165,6 +168,7 @@ export default {
 
     span {
       cursor: pointer;
+
     }
   }
 }

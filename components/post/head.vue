@@ -4,12 +4,7 @@
     <header>
       <!-- 搜索框 -->
       <div class="search">
-        <el-input
-          @keyup.enter.native="searchByCity"
-          placeholder="请输入想去的地方，如'广州'"
-          v-model="searchText"
-          class="input-with-select"
-        >
+        <el-input @keyup.enter.native="searchByCity" placeholder="请输入想去的地方，如'广州'" v-model="searchText" class="input-with-select">
           <el-button @click="searchByCity" slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </div>
@@ -25,11 +20,25 @@
         <el-col class="strategy-text" :span="4">推荐攻略</el-col>
         <el-col style="flex:1"></el-col>
         <el-col class="writeBtn" :span="4">
-            <el-button type="primary" icon="el-icon-edit" @click="$router.push('/post/create')">
-              <nuxt-link to="/post/create">写游记</nuxt-link>
-            </el-button>
+          <el-button type="primary" icon="el-icon-edit" @click="$router.push('/post/create')">
+            <nuxt-link to="/post/create">写游记</nuxt-link>
+          </el-button>
         </el-col>
       </el-row>
+
+      <!-- 轮播图 -->
+      <!-- <div class="container">
+        <el-carousel  arrow="always">
+          <el-carousel-item v-for="(item,index) in banners" :key="index">
+            <div 
+            class="banner-image" 
+            :style="`background:url(${$axios.defaults.baseURL + item.url}) center center no-repeat;
+            background-size:contain contain`">
+            </div>
+          </el-carousel-item>
+        </el-carousel>
+      </div> -->
+
     </header>
   </div>
 </template>
@@ -39,7 +48,10 @@ export default {
     return {
       searchText: "",
       // 推荐文字数组
-      recommendList: ["广州", "上海", "北京"]
+      recommendList: ["广州", "上海", "北京"],
+
+      // // 轮播图
+      // banners: []
     };
   },
   methods: {
@@ -51,7 +63,16 @@ export default {
       // 把点击的城市名传给main父组件
       this.$emit("getDataByCity", item);
     }
-  }
+  },
+  // mounted() {
+  //   // 请求轮播图的数据
+  //   this.$axios({
+  //     url: "/scenics/banners"
+  //   }).then(res => {
+  //     // 赋值给banners
+  //     this.banners = res.data.data;
+  //   });
+  // }
 };
 </script>
 <style lang='less' scoped>
@@ -115,5 +136,34 @@ header {
       border-bottom: 2px solid @color;
     }
   }
+//   .el-carousel__item h3 {
+//     color: #475669;
+//     font-size: 18px;
+//     opacity: 0.75;
+//     height: 200px;
+//     line-height: 300px;
+//     margin: 0;
+//   }
+
+//   .el-carousel__item:nth-child(2n) {
+//     background-color: #99a9bf;
+//   }
+
+//   .el-carousel__item:nth-child(2n+1) {
+//     background-color: #d3dce6;
+//   }
+//   .container{
+//     width:100%;
+//     margin:0 auto;
+//     position:relative;
+//  /deep/ .el-carousel__container {
+//     height: 300px;
+//   }
+//    .banner-image{
+//         width:100%;
+//         height:100%;
+//     }
+//   }
+ 
 }
 </style>
