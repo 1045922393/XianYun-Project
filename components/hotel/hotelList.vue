@@ -31,7 +31,7 @@
                 <span class="orange">{{showData.all_remarks}}</span>条评价
               </el-col>
               <el-col :span="8">
-                <span class="orange">68</span>篇游记
+                <span class="orange">{{showData.num_collected}}</span>篇游记
               </el-col>
             </el-row>
             <p class="location">

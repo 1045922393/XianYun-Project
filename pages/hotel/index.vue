@@ -92,6 +92,9 @@
         <!-- 循环遍历酒店列表 -->
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
+      <div class="page">
+          <el-pagination class="pagination" prev-text="<上一页" next-text="下一页>" layout="prev, pager, next" :total="50"></el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -105,9 +108,7 @@ export default {
   data() {
     return {
       // 筛选条件
-      option:{
-
-      },
+      option: {},
       // counts人数
       counts: "",
       person: 0,
@@ -185,9 +186,9 @@ export default {
     "hotel-filter": hotelFilter,
     "hotel-list": hotelList
   },
-  watch:{
-    $route(){
-      this.filterHotel()
+  watch: {
+    $route() {
+      this.filterHotel();
     }
   },
   methods: {
@@ -234,11 +235,12 @@ export default {
     },
     // 封装筛选
     filterHotel() {
-      let defObj=this.$route.query
+      let defObj = this.$route.query;
+      console.log(defObj)
       this.$axios({
         url: "/hotels",
         method: "get",
-        params:defObj
+        params: defObj
       }).then(res => {
         this.hotels = res.data.data;
         this.hotelsTotal = res.data.total;
@@ -255,12 +257,11 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route)
     if (!this.$route.query.city) {
       this.$router.push("/hotel?city=74");
     }
     // 获取酒店列表,前十个
-    this.filterHotel()
+    this.filterHotel();
     // this.$axios({
     //   url: "/hotels",
     //   method: "get"
@@ -302,6 +303,15 @@ export default {
     }
     .filter {
       margin-top: 20px;
+    }
+    .page{
+      padding:10px 0;
+      box-sizing:border-box;
+      height: 50px;
+      .pagination{
+        float:right;
+        color:blueviolet;
+      }
     }
   }
 }
