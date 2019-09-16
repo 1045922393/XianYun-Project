@@ -81,14 +81,14 @@
             <hotel-nav :cityName="citystate"></hotel-nav>
           </el-col>
           <el-col :span="10">
-            <hotel-map :markHotels="hotels"></hotel-map>
+            <hotel-map v-loading="loading" :markHotels="hotels"></hotel-map>
           </el-col>
         </el-row>
       </div>
       <div class="filter">
         <hotel-filter :cityName="citystate"></hotel-filter>
       </div>
-      <div class="list">
+      <div class="list" v-loading="loading">
         <!-- 循环遍历酒店列表 -->
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
@@ -187,7 +187,8 @@ export default {
       citystate: "南京市",
       cityName: "",
       cityData: {},
-      daterange: []
+      daterange: [],
+      loading:false
     };
   },
   components: {
@@ -198,7 +199,11 @@ export default {
   },
   watch: {
     $route() {
+      this.loading=true;
       this.filterHotel();
+      setTimeout(()=>{
+        this.loading=false
+      },1500)
     }
   },
   methods: {
