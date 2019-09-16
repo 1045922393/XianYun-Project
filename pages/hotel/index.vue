@@ -81,19 +81,29 @@
             <hotel-nav :cityName="citystate"></hotel-nav>
           </el-col>
           <el-col :span="10">
-            <hotel-map v-loading="loading" :markHotels="hotels"></hotel-map>
+            <div v-if="loading">
+              <img src="http://157.122.54.189:9093/images/loading.gif" alt />
+            </div>
+            <hotel-map v-show="!loading" :markHotels="hotels"></hotel-map>
           </el-col>
         </el-row>
       </div>
       <div class="filter">
         <hotel-filter :cityName="citystate"></hotel-filter>
       </div>
-      <div class="list" v-loading="loading">
+      <div class="list" v-show="!loading">
         <!-- 循环遍历酒店列表 -->
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
-      <div v-show="hotels.length===0"><h2 style="color:#409EFF;text-align:center;line-height:60px;">没有适合条件的酒店信息</h2></div>
-      <div class="page" v-show="!hotels.length===0">
+
+      <div v-if="loading" style="text-align:center">
+        <img src="http://157.122.54.189:9093/images/loading.gif" alt />
+      </div>
+
+      <div v-show="hotels.length===0&&!loading">
+        <h2 style="color:#409EFF;text-align:center;line-height:60px;">没有适合条件的酒店信息</h2>
+      </div>
+      <div class="page" v-show="hotels.length!==0&&!loading">
         <el-pagination
           class="pagination"
           prev-text="<上一页"
@@ -188,7 +198,7 @@ export default {
       cityName: "",
       cityData: {},
       daterange: [],
-      loading:false
+      loading: false
     };
   },
   components: {
@@ -199,33 +209,33 @@ export default {
   },
   watch: {
     $route() {
-      this.loading=true;
+      this.loading = true;
       this.filterHotel();
-      setTimeout(()=>{
-        this.loading=false
-      },1500)
+      setTimeout(() => {
+        this.loading = false;
+      }, 2000);
     }
   },
   methods: {
     // 页码
-    pageChange(val){
-      let url = this.$route.fullPath
-      if(url.indexOf('page')===-1){
-        url+="&page="+val
-      }else{
-        if(val===1){
-          url=url.replace(`&page=${this.$route.query.page}`,"")
+    pageChange(val) {
+      let url = this.$route.fullPath;
+      if (url.indexOf("page") === -1) {
+        url += "&page=" + val;
+      } else {
+        if (val === 1) {
+          url = url.replace(`&page=${this.$route.query.page}`, "");
         }
-        url=url.replace(`page=${this.$route.query.page}`,`page=${val}`)
+        url = url.replace(`page=${this.$route.query.page}`, `page=${val}`);
       }
-      this.$router.push(url)
+      this.$router.push(url);
     },
     // 查看价格
     checkPrice() {
-      this.counts="1成人"
-      this.adultValue=1;
-      this.childrenValue=0;
-      this.$router.push("/hotel?city=74")
+      this.counts = "1成人";
+      this.adultValue = 1;
+      this.childrenValue = 0;
+      this.$router.push("/hotel?city=74");
     },
     // 确认人数
     comfirmCounts() {
@@ -288,12 +298,15 @@ export default {
     },
     // 封装筛选
     filterHotel() {
-      let url = this.$route.fullPath
-      if(url.indexOf("page")!==-1){
-        url = url.replace(`page=${this.$route.query.page}`,`_start=${(this.$route.query.page-1)*5}`)
+      let url = this.$route.fullPath;
+      if (url.indexOf("page") !== -1) {
+        url = url.replace(
+          `page=${this.$route.query.page}`,
+          `_start=${(this.$route.query.page - 1) * 5}`
+        );
       }
       // let defObj = this.$route.query;
-      let queryStr = url.slice(6)
+      let queryStr = url.slice(6);
       this.$axios({
         url: `/hotels${queryStr}`,
         method: "get"
@@ -318,7 +331,11 @@ export default {
       this.$router.push("/hotel?city=74");
     }
     // 获取酒店列表,前十个
+    this.loading = true;
     this.filterHotel();
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
     // this.$axios({
     //   url: "/hotels",
     //   method: "get"

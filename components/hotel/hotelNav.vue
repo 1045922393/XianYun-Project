@@ -123,6 +123,7 @@ export default {
     this.$axios({
       url: `/cities?name=${city}`
     }).then(res => {
+      console.log(res)
       this.scenics = res.data.data[0].scenics;
       if(this.$route.query.city!==res.data.data[0].id){
         this.$router.push(`/hotel?city=${res.data.data[0].id}`)
