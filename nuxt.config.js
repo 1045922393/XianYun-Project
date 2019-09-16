@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: "第九组是最牛逼的！！！",
+    title: "全国最大的同性交友平台",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -15,7 +15,11 @@ export default {
       }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "https://github.githubassets.com/favicon.ico"
+      },
       {
         rel: "stylesheet",
         type: "text/css",
@@ -56,7 +60,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: "http://127.0.0.1:1337" // 新增axios默认请求路径
+    baseURL: "http://157.122.54.189:9095" // 新增axios默认请求路径http://127.0.0.1:1337
+    // http://157.122.54.189:9095
   },
   /*
    ** Build configuration

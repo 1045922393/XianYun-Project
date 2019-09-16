@@ -4,12 +4,7 @@
     <header>
       <!-- 搜索框 -->
       <div class="search">
-        <el-input
-          @keyup.enter.native="searchByCity"
-          placeholder="请输入想去的地方，如'广州'"
-          v-model="searchText"
-          class="input-with-select"
-        >
+        <el-input @keyup.enter.native="searchByCity" placeholder="请输入想去的地方，如'广州'" v-model="searchText" class="input-with-select">
           <el-button @click="searchByCity" slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </div>
@@ -25,9 +20,9 @@
         <el-col class="strategy-text" :span="4">推荐攻略</el-col>
         <el-col style="flex:1"></el-col>
         <el-col class="writeBtn" :span="4">
-            <el-button type="primary" icon="el-icon-edit" @click="$router.push('/post/create')">
-              <nuxt-link to="/post/create">写游记</nuxt-link>
-            </el-button>
+          <el-button type="primary" icon="el-icon-edit" @click="$router.push('/post/create')">
+            <nuxt-link to="/post/create">写游记</nuxt-link>
+          </el-button>
         </el-col>
       </el-row>
     </header>
@@ -39,7 +34,7 @@ export default {
     return {
       searchText: "",
       // 推荐文字数组
-      recommendList: ["广州", "上海", "北京"]
+      recommendList: ["广州", "上海", "北京"],
     };
   },
   methods: {
@@ -51,7 +46,7 @@ export default {
       // 把点击的城市名传给main父组件
       this.$emit("getDataByCity", item);
     }
-  }
+  },
 };
 </script>
 <style lang='less' scoped>
