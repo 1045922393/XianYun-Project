@@ -4,9 +4,9 @@
     <el-row>
       <el-col>
         <el-breadcrumb class="arrow">
-          <el-breadcrumb-item :to="{ path: '/hotel' }">{{hotelData.breadcrumb}}</el-breadcrumb-item>
-          <!-- <el-breadcrumb-item>南京酒店</el-breadcrumb-item>
-          <el-breadcrumb-item>南京世茂滨江希尔顿酒店</el-breadcrumb-item>-->
+          <el-breadcrumb-item :to="{ path: '/hotel' }">酒店</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/hotel' }">南京酒店</el-breadcrumb-item>
+          <el-breadcrumb-item>{{hotelData.name}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
     </el-row>
@@ -37,99 +37,20 @@
     <!-- 图片 -->
     <el-row>
       <el-col>
-        <div data-v-1895589c data-v-3cab31ba class="photo-view el-row">
-          <div data-v-1895589c class="main-pic el-col el-col-16">
-            <img height="360" width="640" src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" />
-            <span data-v-1895589c class="summary"></span>
+        <div class="photo-view">
+          <div class="main-pic el-col el-col-16">
+            <img height="360" width="640" :src="bigImg" />
           </div>
-          <div data-v-1895589c class="list-pics el-col el-col-8">
-            <div
-              data-v-1895589c
-              class="list-item el-row"
-              style="margin-left: -10px; margin-right: -10px;"
-            >
+          <div class="list-pics el-col el-col-8">
+            <div class="list-item el-row" style="margin-left: -10px; margin-right: -10px;">
               <div
-                data-v-1895589c
                 class="el-col el-col-12"
                 style="padding-left: 10px; padding-right: 10px;"
+                v-for="(item,index) in picsArr"
+                :key="index"
               >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
-                </a>
-              </div>
-              <div
-                data-v-1895589c
-                class="el-col el-col-12"
-                style="padding-left: 10px; padding-right: 10px;"
-              >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/2.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
-                </a>
-              </div>
-              <div
-                data-v-1895589c
-                class="el-col el-col-12"
-                style="padding-left: 10px; padding-right: 10px;"
-              >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/3.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
-                </a>
-              </div>
-              <div
-                data-v-1895589c
-                class="el-col el-col-12"
-                style="padding-left: 10px; padding-right: 10px;"
-              >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/4.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
-                </a>
-              </div>
-              <div
-                data-v-1895589c
-                class="el-col el-col-12"
-                style="padding-left: 10px; padding-right: 10px;"
-              >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/5.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
-                </a>
-              </div>
-              <div
-                data-v-1895589c
-                class="el-col el-col-12"
-                style="padding-left: 10px; padding-right: 10px;"
-              >
-                <a data-v-1895589c href="javascript:void(0)">
-                  <img
-                    data-v-1895589c
-                    width="160"
-                    src="http://157.122.54.189:9093/images/hotel-pics/6.jpeg"
-                    alt="南京世茂滨江希尔顿酒店"
-                  />
+                <a href="javascript:void(0)">
+                  <img width="160" @click="changeBigPic(item)" :src="item" />
                 </a>
               </div>
             </div>
@@ -150,7 +71,7 @@
         <div>最低价格/每晚</div>
       </el-col>
     </el-row>
-    <nuxt-link to="#" v-for="(item,index) in hotelData.products" :key="index">
+    <a href="https://hotels.ctrip.com/hotel/694679.html" target="_blank" v-for="(item,index) in hotelData.products" :key="index">
       <el-row class="products">
         <el-col :span="8" style="width:40%">
           <div>{{item.name}}</div>
@@ -165,7 +86,7 @@
           </div>
         </el-col>
       </el-row>
-    </nuxt-link>
+    </a>
 
     <!-- 地图风景 -->
     <el-row style="margin:40px 0;">
@@ -179,8 +100,39 @@
         <div class="grid-content bg-purple-light">
           <!-- 风景 -->
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="风景" name="first">用户管理</el-tab-pane>
-            <el-tab-pane label="交通" name="second">配置管理</el-tab-pane>
+            <el-tab-pane label="风景" name="first">
+              <ol style="height:306px;overflow-y:auto">
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">没有</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+              </ol>
+            </el-tab-pane>
+            <el-tab-pane label="交通" name="second">
+              <ol style="height:306px;overflow-y:auto">
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">还是没有</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+              </ol>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </el-col>
@@ -214,9 +166,14 @@
             <el-col :span="4">
               <div class="grid-content bg-purple">主要设施</div>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="20">
               <div class="grid-content bg-purple">
-                <el-tag type="info">wifi</el-tag>
+                <el-tag
+                  type="info"
+                  v-for="(item,index) in assetsArr"
+                  :key="index"
+                  style="margin-right:10px;"
+                >{{item.name}}</el-tag>
               </div>
             </el-col>
           </el-col>
@@ -225,7 +182,7 @@
         <el-row>
           <el-col class="formtabel">
             <el-col :span="4">
-              <div class="grid-content bg-purple">主要设施</div>
+              <div class="grid-content bg-purple">停车服务</div>
             </el-col>
             <el-col :span="20">
               <div class="grid-content bg-purple">免费:提供免费停车位：酒店停车场，免费</div>
@@ -248,23 +205,24 @@
     <!-- 用户评论 -->
     <el-row>
       <el-col :span="24">
-        <h4>0条真实用户评论</h4>
+        <h4>用户评论</h4>
       </el-col>
     </el-row>
     <el-row class="discuss">
       <el-col :span="4">
-        <p>总评数：937</p>
-        <p>好评数：282</p>
-        <p>差评数：22</p>
+        <p>总评数：{{hotelData.good_remarks+hotelData.bad_remarks}}</p>
+        <p>好评数：{{hotelData.good_remarks}}</p>
+        <p>差评数：{{hotelData.bad_remarks}}</p>
       </el-col>
-      <el-col :span="5" class="star">  
+      <el-col :span="5" class="star">
         <el-rate
-        v-model="hotelData.stars" 
-        disabled 
-        show-score 
-        text-color="#ff9900" 
-        score-template="{value}分" 
-        class="role"></el-rate>
+          v-model="hotelData.stars"
+          disabled
+          show-score
+          text-color="#ff9900"
+          score-template="{value}分"
+          class="role"
+        ></el-rate>
         <div class="rmd">推荐</div>
       </el-col>
       <el-col :span="5">
@@ -329,11 +287,23 @@
 export default {
   data() {
     return {
-      value:4,
-      activeName: "second",
+      // 大图的网址
+      bigImg: "http://157.122.54.189:9093/images/hotel-pics/1.jpeg",
+      // 设施数组
+      picsArr: [
+        "http://157.122.54.189:9093/images/hotel-pics/1.jpeg",
+        "http://157.122.54.189:9093/images/hotel-pics/2.jpeg",
+        "http://157.122.54.189:9093/images/hotel-pics/3.jpeg",
+        "http://157.122.54.189:9093/images/hotel-pics/4.jpeg",
+        "http://157.122.54.189:9093/images/hotel-pics/5.jpeg",
+        "http://157.122.54.189:9093/images/hotel-pics/6.jpeg"
+      ],
+      assetsArr: [],
+      value: 4,
+      activeName: "first",
       hotelData: {
         location: {},
-        scores:{},
+        scores: {}
       }
     };
   },
@@ -353,8 +323,11 @@ export default {
       // 创建一个 Marker 实例：
       var marker = new AMap.Marker({
         // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-        position: new AMap.LngLat(_this.hotelData.location.longitude,_this.hotelData.location.latitude),   
-        title: '好来阁'
+        position: new AMap.LngLat(
+          _this.hotelData.location.longitude,
+          _this.hotelData.location.latitude
+        ),
+        title: _this.hotelData.name
       });
       // 将创建的点标记添加到已有的地图实例：
       map.add(marker);
@@ -366,18 +339,29 @@ export default {
     jsapi.src = url;
     document.head.appendChild(jsapi);
 
-
-
     // 请求酒店详情数据
     let id = this.$route.query.id;
     this.$axios({
       url: `/hotels?id=${id}`
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       this.hotelData = res.data.data[0];
+    });
+
+    // 获取酒店设施数据
+    this.$axios({
+      url: "hotels/options"
+    }).then(res => {
+      // console.log(res)
+      this.assetsArr = this.hotelFacilities = res.data.data.assets;
+      // console.log(this.hotelFacilities)
     });
   },
   methods: {
+    // 点击改变大图
+    changeBigPic(img) {
+      this.bigImg = img;
+    },
     // 风景和交通事件
     handleClick(tab, event) {
       console.log(tab, event);
@@ -391,11 +375,10 @@ export default {
 <style scoped lang="less">
 .details {
   i {
-    margin: -5px;
+    margin: -4px;
   }
   width: 1000px;
   margin: 0 auto;
-
   .arrow {
     height: 50px;
     line-height: 50px;

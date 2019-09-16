@@ -1,6 +1,8 @@
 <template>
   <div class="cmt-wrapper">
-    <div class="cmt-list" v-for="(item,index) in comment" :key="index">
+    <h2 v-show="total==0">暂无评论</h2>
+    <div v-if="total!==0">
+    <div class="cmt-list"  v-for="(item,index) in comment" :key="index">
       <div class="com-item">
         <div class="cmt-info">
           <img :src="`${ $axios.defaults.baseURL + item.account.defaultAvatar}`" />
@@ -42,6 +44,7 @@
         :total="total"
       ></el-pagination>
     </el-row>
+    </div>
   </div>
 </template>
 <script>
