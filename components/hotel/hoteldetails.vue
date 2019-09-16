@@ -327,7 +327,7 @@ export default {
           _this.hotelData.location.longitude,
           _this.hotelData.location.latitude
         ),
-        title: "好来阁"
+        title: _this.hotelData.name
       });
       // 将创建的点标记添加到已有的地图实例：
       map.add(marker);
