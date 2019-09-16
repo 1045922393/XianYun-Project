@@ -339,7 +339,13 @@ export default {
         this.total = res.data.total;
         this.comment = res.data.data;
       });
+    },
+    listData(val) {
+      console.log(val.follow,44)
+      this.reObj.follow = val.follow;
+      this.name1=val.name1
     }
+
   },
   filters: {
     times: function(t) {
@@ -348,6 +354,12 @@ export default {
     },
     long: function(i) {
       return i > 100 ? 100 : i;
+    }
+  },
+  computed:{
+    listData() {
+      return this.$store.state.post.fasong;
+      // this.$store.state.post.fasong
     }
   }
 };

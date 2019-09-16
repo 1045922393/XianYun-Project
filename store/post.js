@@ -1,10 +1,13 @@
 // 用户管理
 export const state = () => {
     return {
-        
+        fasong: {}
     }
 }
 
 export const mutations = {
-    setUserInfo(){}
+    setUserInfo() { },
+    setfasong(state, v) {
+        state.fasong = v
+    }
 };
