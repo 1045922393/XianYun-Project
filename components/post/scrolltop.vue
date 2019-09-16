@@ -12,31 +12,37 @@
 <script>
 export default {
   name: 'BackToTop',
+   //定义一些父组件的配置项
   props: {
     transitionName: {
       type: String,
       default: 'fade'
     },
-    customStyle: {
-      type: Object
+    customStyle: {       //按钮样式
+      type: Object 
     },
-    visibilityHeight: { // 纵向滑动多远距离出现滚动条
+    visibilityHeight: {  // 纵向滑动多远距离出现滚动条
       type: Number
     },
-    backPosition: { // 返回顶部时，滚动到哪里（距离顶部的距离）
+    backPosition: {      // 返回顶部时，滚动到哪里（距离顶部的距离）
       type: Number,
       default: 0
     }
   },
   data() {
     return {
+      //默认按钮不出现
       visible: false,
+      //定义定时器
       interval: null
     }
   },
+  
+  //监听页面滚动
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
   },
+  //销毁定时器
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
     if(this.interval) {
@@ -47,6 +53,7 @@ export default {
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
     },
+    //点击回到顶部
     backToTop() {
       let distanceY = window.pageYOffset
       let i = 0
@@ -83,7 +90,7 @@ export default {
 
 <style lang="less" scoped>
 .page-component-up{
-  position: relative;
+  position: fixed;
   cursor: pointer;
   text-align: center;
   transition: .3s;

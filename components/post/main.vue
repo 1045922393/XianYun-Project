@@ -79,16 +79,16 @@
     </main>
     <!-- 分页 -->
     <el-pagination class="pagination" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[3, 5, 10, 15]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
-    <!-- 返回顶部 -->
+    <!-- 返回顶部
     <el-tooltip placement="top" content="返回顶部">
       <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50">
       </back-to-top>
-    </el-tooltip>
+    </el-tooltip> -->
   </div>
 </template>
 <script>
 import Head from "./head";
-import BackToTop from "./scrolltop";
+// import BackToTop from "./scrolltop";
 export default {
   data() {
     return {
@@ -124,22 +124,22 @@ export default {
         }
       ],
       // 返回顶部
-      myBackToTopStyle: {
-        "left": "730px",
-        "bottom": "30px",
-        "width": "40px",
-        "height": "40px",
-        "border":"1px solid #e5e5e5",
-        "border-radius": "20px",
-        "line-height": "40px",
-        "background": "#fff"
-      }
+      // myBackToTopStyle: {
+      //   "right": "380px",
+      //   "bottom": "335px",
+      //   "width": "40px",
+      //   "height": "40px",
+      //   "border":"1px solid #e5e5e5",
+      //   "border-radius": "20px",
+      //   "line-height": "40px",
+      //   "background": "#fff"
+      // }
     };
   },
   components: {
     Head,
     // 回到顶部组件
-    BackToTop
+    // BackToTop
   },
   mounted() {
     // 默认从第0条数据开始拿，拿3条数据
