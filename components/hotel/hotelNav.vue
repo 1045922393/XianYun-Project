@@ -124,6 +124,9 @@ export default {
       url: `/cities?name=${city}`
     }).then(res => {
       this.scenics = res.data.data[0].scenics;
+      if(this.$route.query.city!==res.data.data[0].id){
+        this.$router.push(`/hotel?city=${res.data.data[0].id}`)
+      }
       this.scenics.unshift({ name: "全部", id: 3000 });
       let ind = 0;
       if (this.$route.query.scenic) {
@@ -184,7 +187,7 @@ export default {
   .area {
     padding-bottom: 10px;
     .hiddenNav {
-      height: 38px;
+      height: 19px;
       overflow: hidden;
     }
     .areaList {
