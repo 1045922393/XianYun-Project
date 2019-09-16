@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: "全国最大的同性交友平台",
+    title: "全国最大的交友平台上线了",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
