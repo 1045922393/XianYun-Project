@@ -13,7 +13,7 @@
           
       </el-row>
       <div class="cmt-ctrl">
-        <a href>回复</a>
+        <a @click="fsong(date.parent.id,date.parent.account.nickname)">回复</a>
       </div>
     </div>
     <!-- <comment1 :date="date.parent"></comment1> -->
@@ -24,9 +24,21 @@ let moment = require("moment");
 export default {
   name: "comment1",
   props: ["date"],
-  // mounted(){
-  //     console.log(this.date,123)
-  // },
+  data(){
+    return {
+      fs:{}
+    }
+  },
+  methods:{
+    fsong(i,n){
+      // console.log(i,n);
+      this.fs.follow=i;
+      this.fs.name1=n;
+      // console.log(this.fs)
+      this.$store.commit("post/setfasong",this.fs)
+      // this.$store.state.post.fasong
+    }
+  },
   filters: {
     times: function(t) {
       // console.log(moment(t).format('YYYY-MM-DD HH:MM' ))
