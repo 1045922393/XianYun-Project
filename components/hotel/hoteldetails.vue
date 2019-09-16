@@ -4,9 +4,9 @@
     <el-row>
       <el-col>
         <el-breadcrumb class="arrow">
-          <el-breadcrumb-item :to="{ path: '/hotel' }">{{hotelData.breadcrumb}}</el-breadcrumb-item>
-          <!-- <el-breadcrumb-item>南京酒店</el-breadcrumb-item>
-          <el-breadcrumb-item>南京世茂滨江希尔顿酒店</el-breadcrumb-item>-->
+          <el-breadcrumb-item :to="{ path: '/hotel' }">酒店</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/hotel' }">南京酒店</el-breadcrumb-item>
+          <el-breadcrumb-item>{{hotelData.name}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
     </el-row>
@@ -102,7 +102,7 @@
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="风景" name="first">
               <ol style="height:306px;overflow-y:auto">
-                <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">没有</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">uh</li>
@@ -119,7 +119,7 @@
             </el-tab-pane>
             <el-tab-pane label="交通" name="second">
               <ol style="height:306px;overflow-y:auto">
-                <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
+                <li style="margin: 0 10px 10px 10px;cursor: pointer">还是没有</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
                 <li style="margin: 0 10px 10px 10px;cursor: pointer">nghj</li>
