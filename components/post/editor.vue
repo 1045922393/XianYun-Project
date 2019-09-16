@@ -1,7 +1,7 @@
 <template>
   <div class="editor">
     <h2>发表新攻略</h2>
-    <p>分享你的个人游记，让更多人看到哦！{{currentIndex}}</p>
+    <p>分享你的个人游记，让更多人看到哦！</p>
     <el-form>
       <el-form-item>
         <el-input placeholder="请输入标题" v-model="postForm.title"></el-input>
