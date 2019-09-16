@@ -42,6 +42,8 @@
       <!-- 提交评论 -->
       <div class="add">
         <h4>评论</h4>
+        <el-tag closable v-show="name1!=null" @close="del">回复 @{{name1}}</el-tag>
+
         <div class="cmt-input">
           <el-input type="textarea" placeholder="请输入内容" v-model="reObj.content" resize="none"></el-input>
         </div>
@@ -99,7 +101,7 @@
                     </div>
                   </el-row>
                   <div class="cmt-ctrl">
-                    <a href>回复</a>
+                    <a @click="huifu(item.id,item.account.nickname)">回复</a>
                   </div>
                 </div>
               </div>
@@ -166,7 +168,7 @@ export default {
       init: {
         post: 4,
         _limit: 2,
-        _start: 1
+        _start: 0
       },
       comment: [],
       digui: {},
@@ -180,7 +182,8 @@ export default {
         pics: [],
         post: ""
       },
-      shuaxing: true
+      shuaxing: true,
+      name1:null
     };
   },
   components: {
@@ -197,7 +200,7 @@ export default {
       url: "/posts",
       params: id
     }).then(res => {
-      console.log(res.data.data[0],666);
+      console.log(res.data.data[0], 666);
       this.res = res.data.data[0];
       this.text.title = res.data.data[0].title;
       this.text.content = res.data.data[0].content;
@@ -284,12 +287,30 @@ export default {
         data: this.reObj
       }).then(res => {
         console.log(res);
+        
         this.$message.success(res.data.message);
         this.reObj.content = "";
         this.$refs.upload.clearFiles();
-        this.shuaxing = !this.shuaxing;
-        console.log(this.shuaxing);
+        this.xx();
+        this.del()
+        // console.log(this.shuaxing);
       });
+    },
+    xx() {
+      console.log(999);
+      // setTimeout(() => {}
+      this.shuaxing = !this.shuaxing;
+      // }, 500);
+    },
+    huifu(v,n) {
+      this.reObj.follow = v;
+      console.log(n);
+      this.name1=n
+    },
+    del(){
+      console.log(888)
+      this.name1 = null,
+      delete this.reObj.follow
     }
   },
   watch: {
@@ -308,6 +329,7 @@ export default {
       deep: true
     },
     shuaxing() {
+      // this.xx(),
       this.$axios({
         method: "get",
         url: "/posts/comments",
