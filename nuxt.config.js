@@ -5,14 +5,14 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: '全国最大的同性交友平台',
+    title: '全国最大的交友平台上线了',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon-a.ico' },
       { rel: 'stylesheet', type: 'text/css', href: '//at.alicdn.com/t/font_1168872_ehvuah8v57g.css'}
     ]                                                 
   },
