@@ -43,9 +43,10 @@
             align="middle" 
             class="search-input">
                 <input 
+                v-model="searchContent"
                 :placeholder="options[current].placeholder" 
                 />
-                <i class="el-icon-search"></i>
+                <i @click="turnTo" class="el-icon-search"></i>
             </el-row>
         </div>
     </div>
@@ -59,6 +60,8 @@ export default {
 
   data(){
     return {
+      // 搜索内容
+      searchContent:'',
       // 轮播图数组
       banners: [
         // "http://157.122.54.189:9095/assets/images/th01.jfif",
@@ -88,6 +91,20 @@ export default {
   },
 
   methods: {
+    //点击搜索
+    turnTo(){
+      if(this.current===0){
+        this.$router.push(`/post?city=${this.searchContent}`)
+      }else if(this.current===1){
+        this.$message({
+          type:'warning',
+          message:'请在酒店首页搜索城市酒店,现在正为您跳转至酒店首页...',
+          center:true,
+          duration:2000
+        })
+        this.$router.push(`/hotel?city=${this.searchContent}`)
+      }
+    },
     // 点击搜索的tab栏时候触发
     handleClick(index){
 
