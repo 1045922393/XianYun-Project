@@ -52,7 +52,7 @@
           <div class="cmt_pics">
             <el-upload
               name="files"
-              action="http://127.0.0.1:1337/upload"
+              :action="`${$axios.defaults.baseURL}/upload`"
               list-type="picture-card"
               :on-preview="handlePictureCardPreview"
               :on-remove="handleRemove"
