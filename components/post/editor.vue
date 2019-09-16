@@ -56,6 +56,7 @@ if (process.browser) {
 export default {
   data() {
     return {
+      aaa: this,
       config: {
         modules: {
           // 工具栏
@@ -68,32 +69,46 @@ export default {
         // 主题
         theme: 'snow',
         uploadImage: {
-          url: "http://localhost:1337/upload",
+          url: this.$axios.defaults.baseURL + "/upload",
           name: "files",
-          uploadBefore(file) {
+          uploadBefore: (file) => {
+            console.log(file)
+            console.log(file.type)
+            if (file.type !== "image/jpeg" && file.type !== "image/png" && file.type !== "image/jpg") {
+              this.$message.warning("仅支持jpg,png,jpeg格式，请重新上传")
+              return false
+            }
             return true
           },
           uploadProgress(res) {
 
           },
-          uploadSuccess(res, insert) {
-            insert("http://localhost:1337" + res.data[0].url)
+          uploadSuccess: (res, insert) => {
+            console.log("msg", this.msg)
+            console.log("success")
+            console.log(this)
+            insert(this.$axios.defaults.baseURL + res.data[0].url)
           },
           uploadError() { },
           showProgress: false
         },
         uploadVideo: {
           //url: "http://157.122.54.189:9095/upload",
-          url: "http://localhost:1337/upload",
+          url: this.$axios.defaults.baseURL + "/upload",
           name: "files",
-          uploadBefore(file) {
+          uploadBefore: (file) => {
+            console.log(file.type)
+            if (file.type !== "video/mp4") {
+              this.$message.warning("仅支持mp4类型文件，请重新上传")
+              return false
+            }
             return true
           },
           uploadProgress(res) {
 
           },
-          uploadSuccess(res, insert) {
-            insert("http://localhost:1337" + res.data[0].url)
+          uploadSuccess: (res, insert) => {
+            insert(this.$axios.defaults.baseURL + res.data[0].url)
           },
           uploadError() { },
         },
@@ -321,12 +336,28 @@ export default {
       this.postForm.content = this.$refs.vueEditor.editor.root.innerHTML
     })
 
-    // Object.defineProperty(this.postForm,'content',{
-    //   set:function(val){
-    //     document.getElementById()
-    //     this.$refs.vueEditor.editor.root.innerHTML=val
-    //   }
-    // });
+    //附带属性方法
+    // this.$refs.vueEditor.editor.uploadImage = {
+
+    //   url: "http://localhost:1337/upload",
+    //   name: "files",
+    //   uploadBefore(file) {
+    //     console.log("before")
+    //     console.log(this)
+    //     return true
+    //   },
+    //   uploadProgress(res) {
+    //     console.log("upload")
+    //     console.log(this)
+    //   },
+    //   uploadSuccess(res, insert) {
+    //     console.log("success")
+    //     console.log(this)
+    //     insert("http://localhost:1337" + res.data[0].url)
+    //   },
+    //   uploadError() { },
+    //   showProgress: false
+    // }
 
 
     //组件初始监听传递的数据
