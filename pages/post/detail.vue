@@ -220,7 +220,7 @@ export default {
     this.$axios({
       method: "get",
       url: "/posts/recommend",
-      params: id
+      
     }).then(res => {
       this.aside = res.data.data;
       console.log(this.aside, 123);
