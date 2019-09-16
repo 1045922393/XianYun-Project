@@ -4,7 +4,7 @@
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>酒店</el-breadcrumb-item>
-          <el-breadcrumb-item>{{cityName}}酒店预订</el-breadcrumb-item>
+          <el-breadcrumb-item>{{cityName?cityName:"南京市"}}酒店预订</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="search">
@@ -78,7 +78,7 @@
       <div class="area">
         <el-row>
           <el-col :span="14">
-            <hotel-nav></hotel-nav>
+            <hotel-nav :cityName="citystate"></hotel-nav>
           </el-col>
           <el-col :span="10">
             <hotel-map :markHotels="hotels"></hotel-map>
@@ -92,8 +92,8 @@
         <!-- 循环遍历酒店列表 -->
         <hotel-list v-for="(item,index) in hotels" :key="index" :showData="item"></hotel-list>
       </div>
-      <div v-show="hotels.length===0"><h2>没有适合条件的酒店信息</h2></div>
-      <div class="page">
+      <div v-show="hotels.length===0"><h2 style="color:#409EFF;text-align:center;line-height:60px;">没有适合条件的酒店信息</h2></div>
+      <div class="page" v-show="!hotels.length===0">
         <el-pagination
           class="pagination"
           prev-text="<上一页"
@@ -217,6 +217,9 @@ export default {
     },
     // 查看价格
     checkPrice() {
+      this.counts="1成人"
+      this.adultValue=1;
+      this.childrenValue=0;
       this.$router.push("/hotel?city=74")
     },
     // 确认人数
